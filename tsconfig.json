@@ -22,7 +22,6 @@
   ],
   "exclude": [
     "*.config.js",
-    "packages/**/node_modules",
     "node_modules",
     "dist"
   ]
