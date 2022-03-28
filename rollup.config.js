@@ -32,15 +32,7 @@ function setUpConfig({ output }) {
             }),
             resolve({ extensions }),
             typescript({
-                tsconfig: 'tsconfig.json',
-                tsconfigDefaults: {
-                    exclude: [
-                        '**/__mocks__/*',
-                        '**/*.stories.tsx',
-                        '**/*.test.ts',
-                        '**/*.test.tsx',
-                    ],
-                },
+                tsconfig: 'tsconfig.build.json',
             }),
             commonjs({
                 include: /node_modules/,
