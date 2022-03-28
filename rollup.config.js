@@ -1,67 +1,86 @@
-import fs from 'fs';
-import path from 'path';
-
 import { DEFAULT_EXTENSIONS } from '@babel/core'
-import babel  from '@rollup/plugin-babel';
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import resolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
+import peerDepsExternal from 'rollup-plugin-peer-deps-external'
+import { nodeResolve } from '@rollup/plugin-node-resolve'
+import url from '@rollup/plugin-url'
+import commonjs from '@rollup/plugin-commonjs'
+import babel from '@rollup/plugin-babel'
 import json from '@rollup/plugin-json';
 import { terser } from 'rollup-plugin-terser';
 import { visualizer } from 'rollup-plugin-visualizer'
-import typescript from 'rollup-plugin-typescript2';
+import typescript from 'rollup-plugin-typescript2'
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires,import/no-dynamic-require
-const packageJson = require(path.join(fs.realpathSync(process.cwd()), 'package.json'));
+import packageJson from './package.json'
+
 const extensions = DEFAULT_EXTENSIONS.concat(['.ts', '.tsx'])
+
+const commonPlugins = [
+    typescript({
+        typescript: require('ttypescript'),
+        tsconfig: './tsconfig.json',
+        useTsconfigDeclarationDir: true,
+        declarationDir: './dist',
+        tsconfigDefaults: {
+            noEmit: false,
+            emitDeclarationOnly: true,
+            compilerOptions: {
+                plugins: [
+                    { transform: 'typescript-transform-paths' },
+                    { transform: 'typescript-transform-paths', afterDeclarations: true },
+                ],
+            },
+            exclude: [
+                '**/__mocks__/*',
+                '**/*.stories.tsx',
+                '**/*.test.ts',
+                '**/*.test.tsx'
+            ],
+        },
+    }),
+    commonjs(),
+    json(),
+    babel({
+        babelHelpers: 'runtime',
+        exclude: 'node_modules/**',
+        extensions,
+    }),
+    peerDepsExternal(),
+    terser(),
+    url(),
+    visualizer({
+        filename: 'stats.html',
+    }),
+]
 
 function setUpConfig({ output }) {
     return {
         input: 'src/index.ts',
-        output,
-        watch: {
-            include: '*',
-            exclude: 'node_modules/**',
+        output: {
+            ...output,
+            sourcemap: true,
         },
         plugins: [
-            babel({
-                babelHelpers: 'runtime',
-                exclude: 'node_modules/**',
+            nodeResolve({
+                mainFields: output.format === 'cjs' ? ['main', 'module'] : undefined,
                 extensions,
-                configFile: path.join(__dirname, 'babel.config.js')
             }),
-            resolve({ extensions }),
-            typescript({
-                tsconfig: 'tsconfig.build.json',
-            }),
-            commonjs({
-                include: /node_modules/,
-            }),
-            json(),
-            peerDepsExternal(),
-            terser(),
-            visualizer({
-                filename: 'tmp/stats.html',
-            }),
+            ...commonPlugins,
         ],
         external: [/@babel\/runtime/],
-        preserveModules: output.format === 'es'
-    };
+        preserveModules: output.format === 'esm'
+    }
 }
 
 export default [
     setUpConfig({
         output: {
             file: packageJson.main,
-            sourcemap: true,
             format: 'cjs',
-        },
+        }
     }),
     setUpConfig({
         output: {
-            file: packageJson.module,
-            sourcemap: true,
+            dir: 'dist',
             format: 'esm',
-        },
+        }
     }),
-];
+]

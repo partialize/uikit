@@ -204,6 +204,7 @@ out
 # Nuxt.js build / generate output
 .nuxt
 dist
+build
 
 # Gatsby files
 .cache/
@@ -266,4 +267,4 @@ sketch
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,node,react
 
-tmp
+stats.html
