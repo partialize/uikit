@@ -10,9 +10,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "npm run build:rollup && npm run build:tsc",
-    "build:rollup": "cross-env BABEL_ENV=build rollup -c ./rollup.config.js",
-    "build:tsc": "tsc"
+    "build": "cross-env BABEL_ENV=build rollup -c ./rollup.config.js",
+    "test": ""
   },
   "repository": {
     "type": "git",
