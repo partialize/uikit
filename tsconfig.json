@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "module": "esnext",
+    "target": "es5",
+    "lib": ["dom", "esnext"],
+    "sourceMap": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "strict": true,
+    "allowJs": true,
+    "noImplicitAny": false,
+  },
+  "types": ["react"],
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "*.config.js",
+    "packages/**/node_modules",
+    "node_modules",
+    "dist"
+  ]
+}
