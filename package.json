@@ -12,6 +12,8 @@
   "scripts": {
     "build": "cross-env BABEL_ENV=build rollup -c ./rollup.config.js",
     "clean": "rm -rf build && rm -rf dist",
+    "lint": "eslint './src/**/*.{ts,tsx}'",
+    "lint:fix": "eslint --fix './src/**/*.{ts,tsx}'",
     "test": ""
   },
   "repository": {
@@ -37,7 +39,16 @@
     "@rollup/plugin-url": "^6.1.0",
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
+    "@typescript-eslint/eslint-plugin": "^5.17.0",
+    "@typescript-eslint/parser": "^5.17.0",
     "cross-env": "^7.0.3",
+    "eslint": "^8.12.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rollup": "^2.70.1",
@@ -52,5 +63,10 @@
   "peerDependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
+  },
+  "dependencies": {
+    "-": "^0.0.1",
+    "D": "^1.0.0",
+    "eslint-plugin-react-hooks": "^4.3.0"
   }
 }
