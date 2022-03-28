@@ -9,6 +9,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import { terser } from 'rollup-plugin-terser';
 import { visualizer } from 'rollup-plugin-visualizer'
+import typescript from 'rollup-plugin-typescript2';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires,import/no-dynamic-require
 const packageJson = require(path.join(fs.realpathSync(process.cwd()), 'package.json'));
@@ -30,6 +31,9 @@ function setUpConfig({ output }) {
                 configFile: path.join(__dirname, 'babel.config.js')
             }),
             resolve({ extensions }),
+            typescript({
+                tsconfig: 'tsconfig.json'
+            }),
             commonjs({
                 include: /node_modules/,
             }),
