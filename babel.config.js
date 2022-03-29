@@ -19,11 +19,12 @@ module.exports = (api) => {
     ];
     const plugins = [
         ['@babel/plugin-transform-runtime'],
+        isTest ? ['@babel/plugin-transform-modules-commonjs'] : undefined,
         ['@babel/plugin-proposal-class-properties', { loose: false }],
     ];
 
     return {
         presets,
-        plugins,
+        plugins: plugins.filter((it) => it !== undefined),
     };
 };
