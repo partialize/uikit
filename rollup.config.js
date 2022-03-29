@@ -31,9 +31,10 @@ const commonPlugins = [
             },
             exclude: [
                 '**/__mocks__/*',
-                '**/*.stories.tsx',
                 '**/*.spec.ts',
-                '**/*.spec.tsx'
+                '**/*.spec.tsx',
+                '**/*.stories.tsx',
+                '**/stories/*'
             ],
         },
     }),
