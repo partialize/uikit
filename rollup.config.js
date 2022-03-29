@@ -8,6 +8,7 @@ import json from '@rollup/plugin-json';
 import { terser } from 'rollup-plugin-terser';
 import { visualizer } from 'rollup-plugin-visualizer'
 import typescript from 'rollup-plugin-typescript2'
+import ttypescript from 'ttypescript'
 
 import packageJson from './package.json'
 
@@ -15,7 +16,7 @@ const extensions = DEFAULT_EXTENSIONS.concat(['.ts', '.tsx'])
 
 const commonPlugins = [
     typescript({
-        typescript: require('ttypescript'),
+        typescript: ttypescript,
         tsconfig: './tsconfig.json',
         useTsconfigDeclarationDir: true,
         declarationDir: './dist',
