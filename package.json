@@ -26,17 +26,12 @@
     "lint": "eslint 'src/**/*.+(js|ts)?(x)'",
     "lint:fix": "eslint --fix 'src/**/*.+(js|ts)?(x)'",
     "test": "cross-env BABEL_ENV=test jest --maxWorkers=2",
-    "test:watch": "cross-env BABEL_ENV=test jest --watch"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "test:watch": "cross-env BABEL_ENV=test jest --watch",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*./src/**/*.{js,ts,json,css,less,md}": [
-      "prettier --write",
-      "yarn lint"
+      "npm run lint"
     ]
   },
   "devDependencies": {
