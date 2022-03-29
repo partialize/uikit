@@ -6,7 +6,7 @@ module.exports = {
   transform: {
     '^.+\\.[t|j]sx?$': 'babel-jest',
   },
-  testMatch: ['**/*.test.(ts|tsx)'],
+  testMatch: ['**/*.spec.(ts|tsx)'],
   moduleDirectories: [
     'node_modules',
     'src',

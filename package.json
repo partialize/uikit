@@ -2,32 +2,43 @@
   "name": "@partialize/uikit",
   "version": "0.0.0",
   "description": "",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "sideEffects": false,
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "build": "cross-env BABEL_ENV=build rollup -c ./rollup.config.js",
-    "clean": "npx rimraf dist",
-    "lint": "eslint 'src/**/*.+(js|ts)?(x)'",
-    "lint:fix": "eslint --fix 'src/**/*.+(js|ts)?(x)'",
-    "test": "cross-env BABEL_ENV=test jest --maxWorkers=2",
-    "test:watch": "cross-env BABEL_ENV=test jest --watch",
-    "prebuild": "npm run clean"
+  "homepage": "https://github.com/partialize/uikit#readme",
+  "bugs": {
+    "url": "https://github.com/partialize/uikit/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/partialize/uikit.git"
   },
-  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/partialize/uikit/issues"
+  "author": "",
+  "sideEffects": false,
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prebuild": "npm run clean",
+    "build": "cross-env BABEL_ENV=build rollup -c ./rollup.config.js",
+    "clean": "npx rimraf dist",
+    "lint": "eslint 'src/**/*.+(js|ts)?(x)'",
+    "lint:fix": "eslint --fix 'src/**/*.+(js|ts)?(x)'",
+    "test": "cross-env BABEL_ENV=test jest --maxWorkers=2",
+    "test:watch": "cross-env BABEL_ENV=test jest --watch"
   },
-  "homepage": "https://github.com/partialize/uikit#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*./src/**/*.{js,ts,json,css,less,md}": [
+      "prettier --write",
+      "yarn lint"
+    ]
+  },
   "devDependencies": {
     "@babel/core": "^7.17.8",
     "@babel/plugin-transform-runtime": "^7.17.0",
@@ -46,21 +57,20 @@
     "@types/react-dom": "^17.0.14",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "@typescript-eslint/parser": "^5.17.0",
-    "babel-eslint": "^10.1.0",
     "babel-jest": "^27.5.1",
     "cross-env": "^7.0.3",
     "eslint": "^8.12.0",
     "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-babel": "^5.3.1",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jest": "^26.1.3",
     "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-storybook": "^0.5.7",
+    "husky": "^7.0.4",
     "jest": "^27.5.1",
+    "lint-staged": "^12.3.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rimraf": "^3.0.2",
@@ -69,6 +79,7 @@
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.31.2",
     "rollup-plugin-visualizer": "^5.6.0",
+    "sort-package-json": "^1.55.0",
     "ttypescript": "^1.5.13",
     "typescript": "^4.6.3",
     "typescript-transform-paths": "^3.3.1"
