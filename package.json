@@ -30,7 +30,7 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*./src/**/*.{js,ts,json,css,less,md}": [
+    "*./src/**/*.{js,ts,tsx,jsx}": [
       "npm run lint"
     ]
   },
