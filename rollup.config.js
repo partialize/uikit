@@ -17,7 +17,7 @@ const extensions = DEFAULT_EXTENSIONS.concat(['.ts', '.tsx'])
 const commonPlugins = [
     typescript({
         typescript: ttypescript,
-        tsconfig: './tsconfig.json',
+        tsconfig: './tsconfig.build.json',
         useTsconfigDeclarationDir: true,
         declarationDir: './dist',
         tsconfigDefaults: {
