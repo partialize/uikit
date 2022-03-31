@@ -14,8 +14,8 @@
   "author": "",
   "sideEffects": false,
   "main": "dist/index.cjs.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "module": "dist/build/index.js",
+  "types": "dist/build/index.d.ts",
   "files": [
     "dist"
   ],
@@ -24,6 +24,7 @@
     "storybook": "start-storybook -p 9009",
     "build": "npm run build:rollup",
     "build:rollup": "cross-env BABEL_ENV=build rollup -c ./rollup.config.js",
+    "build:type": "tsc --project tsconfig.build.json --declaration",
     "build:storybook": "build-storybook",
     "clean": "npx rimraf dist",
     "lint": "eslint 'src/**/*.+(js|ts)?(x)'",
@@ -44,6 +45,7 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
+    "@linaria/rollup": "^3.0.0-beta.15",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^21.0.3",
     "@rollup/plugin-json": "^4.1.0",
@@ -80,6 +82,7 @@
     "react-dom": "^17.0.2",
     "rimraf": "^3.0.2",
     "rollup": "^2.70.1",
+    "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.31.2",
@@ -92,5 +95,12 @@
   "peerDependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
+  },
+  "dependencies": {
+    "@linaria/babel-preset": "^3.0.0-beta.15",
+    "@linaria/core": "^3.0.0-beta.15",
+    "@linaria/react": "^3.0.0-beta.15",
+    "@linaria/shaker": "^3.0.0-beta.15",
+    "polished": "^4.1.4"
   }
 }

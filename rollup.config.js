@@ -1,4 +1,5 @@
 import { DEFAULT_EXTENSIONS } from '@babel/core'
+
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import url from '@rollup/plugin-url'
@@ -8,18 +9,27 @@ import json from '@rollup/plugin-json';
 import { terser } from 'rollup-plugin-terser';
 import { visualizer } from 'rollup-plugin-visualizer'
 import typescript from 'rollup-plugin-typescript2'
+import css from 'rollup-plugin-css-only';
+
 import ttypescript from 'ttypescript'
+import linaria from '@linaria/rollup';
 
 import packageJson from './package.json'
 
 const extensions = DEFAULT_EXTENSIONS.concat(['.ts', '.tsx'])
 
 const commonPlugins = [
+    linaria({
+        sourceMap: true
+    }),
+    css({
+        output: 'styles.css',
+    }),
     typescript({
         typescript: ttypescript,
         tsconfig: './tsconfig.build.json',
         useTsconfigDeclarationDir: true,
-        declarationDir: './dist',
+        declarationDir: './dist/build',
         tsconfigDefaults: {
             noEmit: false,
             emitDeclarationOnly: true,
@@ -81,7 +91,7 @@ export default [
     }),
     setUpConfig({
         output: {
-            dir: 'dist',
+            dir: 'dist/build',
             format: 'esm',
         }
     }),
