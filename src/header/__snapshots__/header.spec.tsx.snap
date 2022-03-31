@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`my pretty Container 1`] = `
+<h1
+  className="h2f324r"
+>
+  Hello world
+</h1>
+`;

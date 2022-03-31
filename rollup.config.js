@@ -1,4 +1,5 @@
 import { DEFAULT_EXTENSIONS } from '@babel/core'
+
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import url from '@rollup/plugin-url'
@@ -7,36 +8,20 @@ import babel from '@rollup/plugin-babel'
 import json from '@rollup/plugin-json';
 import { terser } from 'rollup-plugin-terser';
 import { visualizer } from 'rollup-plugin-visualizer'
-import typescript from 'rollup-plugin-typescript2'
-import ttypescript from 'ttypescript'
+import css from 'rollup-plugin-css-only';
+
+import linaria from '@linaria/rollup';
 
 import packageJson from './package.json'
 
 const extensions = DEFAULT_EXTENSIONS.concat(['.ts', '.tsx'])
 
 const commonPlugins = [
-    typescript({
-        typescript: ttypescript,
-        tsconfig: './tsconfig.build.json',
-        useTsconfigDeclarationDir: true,
-        declarationDir: './dist',
-        tsconfigDefaults: {
-            noEmit: false,
-            emitDeclarationOnly: true,
-            compilerOptions: {
-                plugins: [
-                    { transform: 'typescript-transform-paths' },
-                    { transform: 'typescript-transform-paths', afterDeclarations: true },
-                ],
-            },
-            exclude: [
-                '**/__mocks__/*',
-                '**/*.spec.ts',
-                '**/*.spec.tsx',
-                '**/*.stories.tsx',
-                '**/stories/*'
-            ],
-        },
+    linaria({
+        sourceMap: true
+    }),
+    css({
+        output: 'styles.css',
     }),
     commonjs(),
     json(),
@@ -81,7 +66,7 @@ export default [
     }),
     setUpConfig({
         output: {
-            dir: 'dist',
+            dir: 'dist/build',
             format: 'esm',
         }
     }),
