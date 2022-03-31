@@ -7,5 +7,5 @@ const meta: Meta = {
   component: Header,
 };
 
-export const headerTest = () => <Header/>;
+export const headerTest = () => <Header />;
 export default meta;
