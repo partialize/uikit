@@ -15,6 +15,17 @@ module.exports = {
   webpackFinal: async (config) => {
     config.plugins.push(new MiniCssExtractPlugin({ filename: 'styles.css' }));
 
+    config.module.rules[0] =  {
+      test: /\.(mjs|tsx?|jsx?)$/,
+      exclude: /node_modules/,
+      use: [
+        { loader: 'babel-loader' },
+        {
+          loader: '@linaria/webpack-loader',
+          options: { sourceMap: true },
+        },
+      ],
+    };
     config.module.rules[7] = {
       test: /\.css$/,
       sideEffects: true,
@@ -28,19 +39,7 @@ module.exports = {
         },
       ],
     };
-
     config.module.rules.push(
-      {
-        test: /\.(ts|tsx)$/,
-        exclude: /node_modules/,
-        use: [
-          { loader: 'babel-loader' },
-          {
-            loader: '@linaria/webpack-loader',
-            options: { sourceMap: true },
-          },
-        ],
-      },
       {
         test: /\.(jpg|png|gif|woff|woff2|eot|ttf|svg)$/,
         use: [{ loader: 'file-loader' }],
