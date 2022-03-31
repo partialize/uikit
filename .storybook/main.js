@@ -1,5 +1,3 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
 module.exports = {
   stories: [
     '../src/**/*.stories.mdx',
@@ -9,42 +7,16 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-essentials'
   ],
-  features: {
-    babelModeV7: true,
+  core: {
+    builder: "webpack5"
   },
   webpackFinal: async (config) => {
-    config.plugins.push(new MiniCssExtractPlugin({ filename: 'styles.css' }));
-
-    config.module.rules[0] =  {
-      test: /\.(mjs|tsx?|jsx?)$/,
-      exclude: /node_modules/,
-      use: [
-        { loader: 'babel-loader' },
-        {
-          loader: '@linaria/webpack-loader',
-          options: { sourceMap: true },
+    config.module.rules[0].use.push({
+        loader: '@linaria/webpack-loader',
+        options: {
+          sourceMap: true
         },
-      ],
-    };
-    config.module.rules[7] = {
-      test: /\.css$/,
-      sideEffects: true,
-      use: [
-        {
-          loader: MiniCssExtractPlugin.loader
-        },
-        {
-          loader: 'css-loader',
-          options: { sourceMap: true },
-        },
-      ],
-    };
-    config.module.rules.push(
-      {
-        test: /\.(jpg|png|gif|woff|woff2|eot|ttf|svg)$/,
-        use: [{ loader: 'file-loader' }],
-      },
-    );
+    });
 
     return config;
   },

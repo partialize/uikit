@@ -6,6 +6,7 @@ import { modularScale, hiDPI } from 'polished';
 const header = css`
   text-transform: uppercase;
   font-size: ${modularScale(2)};
+  background-color: red;
 
   ${hiDPI(1.5)} {
     font-size: ${modularScale(2.5)};
