@@ -15,13 +15,13 @@ module.exports = (api) => {
             },
         } : undefined],
         ['@babel/preset-react'],
-        ['@babel/preset-typescript', { isTSX: true, allExtensions: true }],
-        ["@linaria"]
+        ['@babel/preset-typescript'],
+        ['@linaria']
     ];
     const plugins = [
         ['@babel/plugin-transform-runtime'],
         isTest ? ['@babel/plugin-transform-modules-commonjs'] : undefined,
-        ['@babel/plugin-proposal-class-properties', { loose: false }],
+        ['@babel/plugin-proposal-class-properties'],
     ];
 
     return {

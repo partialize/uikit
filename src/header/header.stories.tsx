@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Meta } from '@storybook/react';
-import header from './header';
+import Header from './header';
 
 const meta: Meta = {
   title: 'header',
-  component: header,
+  component: Header,
 };
 
-export const headerTest = () => <header>test</header>;
+export const headerTest = () => <Header/>;
 export default meta;
