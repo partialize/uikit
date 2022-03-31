@@ -8,10 +8,8 @@ import babel from '@rollup/plugin-babel'
 import json from '@rollup/plugin-json';
 import { terser } from 'rollup-plugin-terser';
 import { visualizer } from 'rollup-plugin-visualizer'
-import typescript from 'rollup-plugin-typescript2'
 import css from 'rollup-plugin-css-only';
 
-import ttypescript from 'ttypescript'
 import linaria from '@linaria/rollup';
 
 import packageJson from './package.json'
@@ -24,29 +22,6 @@ const commonPlugins = [
     }),
     css({
         output: 'styles.css',
-    }),
-    typescript({
-        typescript: ttypescript,
-        tsconfig: './tsconfig.build.json',
-        useTsconfigDeclarationDir: true,
-        declarationDir: './dist/build',
-        tsconfigDefaults: {
-            noEmit: false,
-            emitDeclarationOnly: true,
-            compilerOptions: {
-                plugins: [
-                    { transform: 'typescript-transform-paths' },
-                    { transform: 'typescript-transform-paths', afterDeclarations: true },
-                ],
-            },
-            exclude: [
-                '**/__mocks__/*',
-                '**/*.spec.ts',
-                '**/*.spec.tsx',
-                '**/*.stories.tsx',
-                '**/stories/*'
-            ],
-        },
     }),
     commonjs(),
     json(),
