@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { DistributiveOmit } from '../type';
+import { DistributiveOmit } from './index';
 
 import OverridableTypeMap from './OverridableTypeMap';
 import BaseProps from './BaseProps';
