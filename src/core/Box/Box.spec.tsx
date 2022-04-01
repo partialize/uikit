@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { render } from '@testing-library/react';
 
 import { css } from '@linaria/core';
@@ -20,7 +20,7 @@ describe('Box', () => {
     expect(box.tagName).toEqual('DIV');
   });
 
-  it('<Box as=? />', () => {
+  it('<Box as= />', () => {
     const { getByTestId } = render(<Box testId={boxTestId} as="a" />);
     const box = getByTestId(boxTestId);
 
@@ -45,7 +45,7 @@ describe('Box', () => {
     expect(box.children.length).toEqual(1);
   });
 
-  it('<Box className=? />', () => {
+  it('<Box className= />', () => {
     const className = css`
       color: blue;
     `;
@@ -54,5 +54,16 @@ describe('Box', () => {
 
     expect(box.tagName).toEqual('DIV');
     expect(box.className).toEqual(className);
+  });
+
+  it('<Box style= />', () => {
+    const style: CSSProperties = {
+      color: 'blue',
+    };
+    const { getByTestId } = render(<Box testId={boxTestId} style={style} />);
+    const box = getByTestId(boxTestId);
+
+    expect(box.tagName).toEqual('DIV');
+    expect(box).toHaveStyle('color: blue;');
   });
 });
