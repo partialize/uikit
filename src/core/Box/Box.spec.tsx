@@ -12,58 +12,56 @@ beforeEach(() => {
   boxTestId = randomTestId();
 });
 
-describe('Box', () => {
-  it('<Box />', () => {
-    const { getByTestId } = render(<Box testId={boxTestId} />);
-    const box = getByTestId(boxTestId);
+it('should tag is div when default render', () => {
+  const { getByTestId } = render(<Box testId={boxTestId} />);
+  const box = getByTestId(boxTestId);
 
-    expect(box.tagName).toEqual('DIV');
-  });
+  expect(box.tagName).toEqual('DIV');
+});
 
-  it('<Box as= />', () => {
-    const { getByTestId } = render(<Box testId={boxTestId} as="a" />);
-    const box = getByTestId(boxTestId);
+it('should tag is changed when use as props', () => {
+  const { getByTestId } = render(<Box testId={boxTestId} as="a" />);
+  const box = getByTestId(boxTestId);
 
-    expect(box.tagName).toEqual('A');
-  });
+  expect(box.tagName).toEqual('A');
+});
 
-  it('<Box>{string}</Box>', () => {
-    const children = randomString(10);
-    const { getByTestId } = render(<Box testId={boxTestId}>{children}</Box>);
-    const box = getByTestId(boxTestId);
+it('should children is rendered when children is string', () => {
+  const children = randomString(10);
+  const { getByTestId } = render(<Box testId={boxTestId}>{children}</Box>);
+  const box = getByTestId(boxTestId);
 
-    expect(box.tagName).toEqual('DIV');
-    expect(box).toHaveTextContent(children);
-  });
+  expect(box.tagName).toEqual('DIV');
+  expect(box).toHaveTextContent(children);
+});
 
-  it('<Box>{box}</Box>', () => {
-    const children = <Box />;
-    const { getByTestId } = render(<Box testId={boxTestId}>{children}</Box>);
-    const box = getByTestId(boxTestId);
+it('should children is rendered when children is element', () => {
+  const children = <Box />;
+  const { getByTestId } = render(<Box testId={boxTestId}>{children}</Box>);
+  const box = getByTestId(boxTestId);
 
-    expect(box.tagName).toEqual('DIV');
-    expect(box.children.length).toEqual(1);
-  });
+  expect(box.tagName).toEqual('DIV');
+  expect(box.children.length).toEqual(1);
+});
 
-  it('<Box className= />', () => {
-    const className = css`
+it('should className is applied when className is exit', () => {
+  const className = css`
       color: blue;
     `;
-    const { getByTestId } = render(<Box testId={boxTestId} className={className} />);
-    const box = getByTestId(boxTestId);
+  const { getByTestId } = render(<Box testId={boxTestId} className={className} />);
+  const box = getByTestId(boxTestId);
 
-    expect(box.tagName).toEqual('DIV');
-    expect(box.className).toEqual(className);
-  });
+  expect(box.tagName).toEqual('DIV');
+  expect(box.className).toEqual(className);
+});
 
-  it('<Box style= />', () => {
-    const style: CSSProperties = {
-      color: 'blue',
-    };
-    const { getByTestId } = render(<Box testId={boxTestId} style={style} />);
-    const box = getByTestId(boxTestId);
+it('should style is applied when style is exit', () => {
+  const style: CSSProperties = {
+    color: 'blue',
+  };
+  const { getByTestId } = render(<Box testId={boxTestId} style={style} />);
+  const box = getByTestId(boxTestId);
 
-    expect(box.tagName).toEqual('DIV');
-    expect(box).toHaveStyle('color: blue;');
-  });
+  expect(box.tagName).toEqual('DIV');
+  expect(box).toHaveStyle('color: blue;');
 });
