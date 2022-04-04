@@ -1,4 +1,5 @@
 module.exports = {
+  testEnvironment: 'jsdom',
   roots: ['./src'],
   setupFilesAfterEnv: ['./jest.setup.ts'],
   moduleFileExtensions: ['ts', 'tsx', 'js'],
@@ -24,4 +25,4 @@ module.exports = {
     '**/*.{ts,tsx,js,jsx}',
     '!**/*.stories.tsx',
   ],
-}
+};
