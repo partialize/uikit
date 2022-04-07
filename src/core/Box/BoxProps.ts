@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { OverrideProps } from '../props';
+import { OverrideProps } from '../type';
 
 import BoxTypeMap from './BoxTypeMap';
 
